@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/pablopioli/boringframework-notifications</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pablopioli/boringframework-notifications</RepositoryUrl>
+    <PackageId>BoringFramework-Notifications</PackageId>
+    <Authors>Pablo Pioli</Authors>
+    <Company />
+    <Product>Boring Framework</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
+  </ItemGroup>
+
+</Project>

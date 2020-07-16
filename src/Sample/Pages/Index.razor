@@ -1,0 +1,52 @@
+﻿@page "/"
+@inject IJSRuntime jsRuntime
+
+<p><button @onclick="CanSendNotifications" class="btn btn-primary">Can send notifications?</button></p>
+<p>@Status</p>
+
+<p><button @onclick="QueryPermission" class="btn btn-primary">I have permission?</button></p>
+<p>@HasPermission</p>
+
+<p><button @onclick="AskForPermission" class="btn btn-primary">Ask for permission</button></p>
+
+<p><button @onclick="SendNotification" class="btn btn-primary">Send notification</button></p>
+
+@code
+{
+    string Status = "Don't know";
+
+    async Task CanSendNotifications()
+    {
+        var result = await jsRuntime.InvokeAsync<bool>("blazorNotifications.browserSupportsNotifications");
+        Status = result ? "Yes!" : "No";
+    }
+
+
+    string HasPermission;
+    async Task QueryPermission()
+    {
+        var result = await jsRuntime.InvokeAsync<string>("blazorNotifications.permissionStatus");
+        if (result == "granted")
+        {
+            HasPermission = "Yes!";
+        }
+        else if (result == "denied")
+        {
+            HasPermission = "Permission was denied";
+        }
+        else
+        {
+            HasPermission = "Still have not asked";
+        }
+    }
+
+    async Task AskForPermission()
+    {
+        await jsRuntime.InvokeVoidAsync("blazorNotifications.requestPermission");
+    }
+
+    async Task SendNotification()
+    {
+        await jsRuntime.InvokeVoidAsync("blazorNotifications.sendNotification", $"Now is {DateTime.Now.ToShortTimeString()}");
+    }
+}
